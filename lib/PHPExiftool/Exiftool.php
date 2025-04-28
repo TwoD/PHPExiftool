@@ -18,7 +18,7 @@ use Symfony\Component\Process\Process;
 
 class Exiftool implements LoggerAwareInterface
 {
-    private $logger;
+    private LoggerInterface $logger;
 
     public function __construct(LoggerInterface $logger)
     {
@@ -28,11 +28,9 @@ class Exiftool implements LoggerAwareInterface
     /**
      * {@inheritdoc}
      */
-    public function setLogger(LoggerInterface $logger)
+    public function setLogger(LoggerInterface $logger): void
     {
         $this->logger = $logger;
-
-        return $this;
     }
 
     /**
@@ -47,7 +45,7 @@ class Exiftool implements LoggerAwareInterface
         $command = self::getBinary() . ' ' . $command;
         $process = new Process($command);
 
-        $this->logger->addInfo(sprintf('Exiftool executes command %s', $process->getCommandLine()));
+        $this->logger->info(sprintf('Exiftool executes command %s', $process->getCommandLine()));
 
         $process->run();
 

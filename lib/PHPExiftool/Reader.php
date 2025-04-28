@@ -108,7 +108,7 @@ class Reader implements \IteratorAggregate
      *
      * @return \Iterator
      */
-    public function getIterator()
+    public function getIterator(): \Traversable
     {
         return $this->all()->getIterator();
     }
